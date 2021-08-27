@@ -737,6 +737,10 @@ bool I2C2_MasterQueueIsEmpty(void);
 
 bool I2C2_MasterQueueIsFull(void);             
 
+//Custom function for MAX chip setup
+void maxWriteByte(uint8_t slaveAddressW, uint8_t reg, uint8_t dataByte);
+//Custom function for MAX chip setup
+void maxReadByte(uint8_t slaveAddressW, uint8_t slaveAddressR, uint8_t reg);
 #ifdef __cplusplus  // Provide C++ Compatibility
 
     }

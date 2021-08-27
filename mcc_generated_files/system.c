@@ -89,11 +89,8 @@
 #include "pin_manager.h"
 #include "clock.h"
 #include "system.h"
-#include "uart1.h"
+#include "uart.h"
 #include "usb/usb.h"
-#include "uart4.h"
-#include "uart2.h"
-#include "uart3.h"
 #include "interrupt_manager.h"
 #include "traps.h"
 #include "i2c2.h"
@@ -105,10 +102,10 @@ void SYSTEM_Initialize(void)
     CLOCK_Initialize();
     USBDeviceInit();
     USBDeviceAttach();
-    UART2_Initialize();
-    UART1_Initialize();
-    UART4_Initialize();
-    UART3_Initialize();
+    RingLightUART_Initialize();
+    CamUART_Initialize();
+    FrontFaceUART_Initialize();
+    FTDIUART_Initialize();
     I2C2_Initialize();
 }
 
