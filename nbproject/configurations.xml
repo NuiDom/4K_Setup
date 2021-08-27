@@ -27,6 +27,7 @@
         <itemPath>mcc_generated_files/clock.h</itemPath>
         <itemPath>../4K_Peripheral_Setup.X/mcc_generated_files/uart.h</itemPath>
       </logicalFolder>
+      <itemPath>timer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -56,6 +57,7 @@
         <itemPath>../4K_Peripheral_Setup.X/mcc_generated_files/uart.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
+      <itemPath>timer.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
