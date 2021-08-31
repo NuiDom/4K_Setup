@@ -46,7 +46,9 @@
   Section: Included Files
 */
 #include "mcc_generated_files/system.h"
-
+#include "mcc_generated_files/uart.h"
+#include "max14830.h"
+#include "timer.h"
 /*
                          Main application
  */
@@ -54,7 +56,9 @@ int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
-
+    MAX_Init();
+    TMR1_Init();
+    
     while (1)
     {
         // Add your application code
