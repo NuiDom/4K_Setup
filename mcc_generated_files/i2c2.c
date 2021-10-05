@@ -729,10 +729,10 @@ void maxWriteByte(uint8_t slaveAddressW, uint8_t reg, uint8_t dataByte)
     while(I2C2STATbits.TRSTAT){}
     
     I2C2_STOP_CONDITION_ENABLE_BIT = 1;
-
+    while(I2C2_STOP_CONDITION_ENABLE_BIT){}
 }
 
-void maxReadByte(uint8_t slaveAddressW, uint8_t slaveAddressR, uint8_t reg)
+uint8_t maxReadByte(uint8_t slaveAddressW, uint8_t slaveAddressR, uint8_t reg)
 {
     I2C2_START_CONDITION_ENABLE_BIT = 1;           //generates start bit
     while(I2C2_START_CONDITION_ENABLE_BIT){}       //waits for start to change back to 0 indicating success of start bit
@@ -757,7 +757,11 @@ void maxReadByte(uint8_t slaveAddressW, uint8_t slaveAddressR, uint8_t reg)
     while(I2C2_ACKNOWLEDGE_ENABLE_BIT);
     
     I2C2_STOP_CONDITION_ENABLE_BIT = 1;       //generates stop bit
-
+    while(I2C2_STOP_CONDITION_ENABLE_BIT){}
+    
+    uint8_t newRead;
+    newRead = I2C2_RECEIVE_REG;
+    return newRead;
 }
 /**
  End of File

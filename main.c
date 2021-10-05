@@ -49,6 +49,8 @@
 #include "mcc_generated_files/uart.h"
 #include "max14830.h"
 #include "timer.h"
+
+void readMaxString(uint8_t slaveAddressW, uint8_t slaveAddressR);
 /*
                          Main application
  */
@@ -56,15 +58,57 @@ int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
-    MAX_Init();
     TMR1_Init();
-    
+    delay_ms(1000);
+    if(PORTBbits.RB13 ==1)
+    {
+        MAX_Init();
+    }
+    uint8_t readData;
     while (1)
     {
-        // Add your application code
-    }
+        
+//        maxWriteByte(MAX_UART0_WRITE, MAX14830_THR, 0x41);    // Successful test MAX TX                                        
+//        delay_ms(200);
 
+        
+//        RingLightUART_Write(0x4B);
+//        delay_ms(1000);
+//        RingLightUART_Write(0x4B);
+//        delay_ms(1000);
+        
+        
+    if(PORTBbits.RB13 == 0)
+    {
+//        count++;
+//        RingLightUART_Write(count);
+//        maxReadByte(MAX_UART2_WRITE, MAX_UART2_READ, MAX14830_ISR);
+        readData = maxReadByte(MAX_UART0_WRITE, MAX_UART0_READ, MAX14830_GLOBALIRQ);
+        if(readData & 0x0E)
+        {   
+            readData = maxReadByte(MAX_UART0_WRITE, MAX_UART0_READ, MAX14830_ISR);                //Max Interrupt testing
+            if(readData & 0x08)
+            {
+                readMaxString(MAX_UART0_WRITE, MAX_UART0_READ);
+//                RingLightUART_Write(0x4B);
+//                delay_ms(1500);
+            }
+        }
+    }
+    
+    }
     return 1;
+}
+
+void readMaxString(uint8_t slaveAddressW, uint8_t slaveAddressR)
+{
+    uint8_t data;
+    data = maxReadByte(slaveAddressW, slaveAddressR, MAX14830_RHR);
+    RingLightUART_Write(data);
+    while(data ='q'){
+        data = maxReadByte(slaveAddressW, slaveAddressR, MAX14830_RHR);
+        RingLightUART_Write(data);
+    }
 }
 /**
  End of File

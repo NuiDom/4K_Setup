@@ -51,14 +51,14 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "i2c2.h"
 #include "uart1.h"
 #include "usb/usb.h"
 #include "uart4.h"
-#include "uart2.h"
 #include "uart3.h"
+#include "uart2.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "i2c2.h"
 
 #warning "This file will be removed in future MCC releases. Use system.h instead."
 
